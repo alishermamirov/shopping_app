@@ -39,6 +39,7 @@ class HomeScreen extends StatelessWidget {
         title: Text("Shopping App"),
       ),
       body: GridView.builder(
+        padding: EdgeInsets.all(8),
         itemCount: products.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 1,

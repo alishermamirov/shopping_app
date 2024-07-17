@@ -12,31 +12,34 @@ class ProductGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridTile(
-      child: Image.network(
-        product.imageUrl,
-        fit: BoxFit.cover,
-      ),
-      footer: GridTileBar(
-        backgroundColor: Colors.black.withOpacity(0.5),
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            product.isFavorite ? Icons.favorite : Icons.favorite_border,
-          ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: GridTile(
+        child: Image.network(
+          product.imageUrl,
+          fit: BoxFit.cover,
         ),
-        title: Text(
-          product.title,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+        footer: GridTileBar(
+          backgroundColor: Colors.black.withOpacity(0.8),
+          leading: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              product.isFavorite ? Icons.favorite : Icons.favorite_border,
+            ),
           ),
-        ),
-        trailing: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.shopping_cart,
+          title: Text(
+            product.title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          trailing: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.shopping_cart,
+            ),
           ),
         ),
       ),
