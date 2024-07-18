@@ -39,7 +39,6 @@ class ProductGridItem extends StatelessWidget {
           ),
           trailing: IconButton(
             onPressed: () {
-             
               cart.addToCart(
                 product.id,
                 product.title,
