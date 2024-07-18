@@ -16,11 +16,11 @@ class CartScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text("Savatcha"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-        child: Column(
-          children: [
-            Card(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -56,32 +56,32 @@ class CartScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-                child: cart.items.isEmpty
-                    ? Center(
-                        child: Text(
-                          "Savatcha bo'sh",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                          textAlign: TextAlign.center,
+          ),
+          Expanded(
+              child: cart.items.isEmpty
+                  ? Center(
+                      child: Text(
+                        "Savatcha bo'sh",
+                        style: TextStyle(
+                          fontSize: 20,
                         ),
-                      )
-                    : ListView.builder(
-                        itemCount: cart.items.length,
-                        itemBuilder: (context, index) {
-                          final cartItem = cart.items.values.toList()[index];
-                          return CartListItem(
-                            id: cart.items.keys.toList()[index],
-                            image: cartItem.image,
-                            title: cartItem.title,
-                            price: cartItem.price,
-                            quantity: cartItem.quantity,
-                          );
-                        },
-                      ))
-          ],
-        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: cart.items.length,
+                      itemBuilder: (context, index) {
+                        final cartItem = cart.items.values.toList()[index];
+                        return CartListItem(
+                          id: cart.items.keys.toList()[index],
+                          image: cartItem.image,
+                          title: cartItem.title,
+                          price: cartItem.price,
+                          quantity: cartItem.quantity,
+                        );
+                      },
+                    ))
+        ],
       ),
     );
   }
