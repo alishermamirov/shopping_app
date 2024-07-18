@@ -12,6 +12,16 @@ class Cart with ChangeNotifier {
     return _items.length;
   }
 
+  double totalPrice() {
+    double price = 0.0;
+    _items.forEach(
+      (key, value) {
+        price += value.price * value.quantity;
+      },
+    );
+    return price;
+  }
+
   void addToCart(String productId, String title, double price, String image) {
     if (_items.containsKey(productId)) {
       _items.update(
