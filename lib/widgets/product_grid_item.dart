@@ -12,8 +12,8 @@ class ProductGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context);
-    print(product.id);
+    final product = Provider.of<Product>(context, listen: false);
+   
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: GridTile(
@@ -27,23 +27,25 @@ class ProductGridItem extends StatelessWidget {
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black.withOpacity(0.8),
-          leading: IconButton(
-            onPressed: () => product.toggleFavorite(),
-            icon: Icon(
-              product.isFavorite ? Icons.favorite : Icons.favorite_border,
+          leading: Consumer<Product>(
+            builder: (context, prod, child) => IconButton(
+              onPressed: () => prod.toggleFavorite(),
+              icon: Icon(
+                prod.isFavorite ? Icons.favorite : Icons.favorite_border,
+              ),
             ),
           ),
           title: Text(
             product.title,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
           trailing: IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.shopping_cart,
             ),
           ),
