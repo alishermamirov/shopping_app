@@ -19,6 +19,39 @@ class ProductGridItem extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: GridTile(
+        footer: GridTileBar(
+          backgroundColor: Colors.black.withOpacity(0.8),
+          leading: Consumer<Product>(
+            builder: (context, prod, child) => IconButton(
+              onPressed: () => prod.toggleFavorite(),
+              icon: Icon(
+                prod.isFavorite ? Icons.favorite : Icons.favorite_border,
+              ),
+            ),
+          ),
+          title: Text(
+            product.title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          trailing: IconButton(
+            onPressed: () {
+             
+              cart.addToCart(
+                product.id,
+                product.title,
+                product.price,
+                product.imageUrl,
+              );
+            },
+            icon: const Icon(
+              Icons.shopping_cart,
+            ),
+          ),
+        ),
         child: InkWell(
           onTap: () => Navigator.of(context)
               .pushNamed(ProductDetailsScreen.routeName, arguments: product.id),
@@ -40,39 +73,6 @@ class ProductGridItem extends StatelessWidget {
               color: Colors.grey.withOpacity(0.2),
             ),
             errorWidget: (context, url, error) => Icon(Icons.error),
-          ),
-        ),
-        footer: GridTileBar(
-          backgroundColor: Colors.black.withOpacity(0.8),
-          leading: Consumer<Product>(
-            builder: (context, prod, child) => IconButton(
-              onPressed: () => prod.toggleFavorite(),
-              icon: Icon(
-                prod.isFavorite ? Icons.favorite : Icons.favorite_border,
-              ),
-            ),
-          ),
-          title: Text(
-            product.title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          trailing: IconButton(
-            onPressed: () {
-              print(cart.itemCount().toString());
-              cart.addToCart(
-                product.id,
-                product.title,
-                product.price,
-                product.imageUrl,
-              );
-            },
-            icon: const Icon(
-              Icons.shopping_cart,
-            ),
           ),
         ),
       ),

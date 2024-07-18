@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 
 class CustomCart extends StatelessWidget {
-  final IconData icon;
+  final Widget child;
   final int count;
   const CustomCart({
     Key? key,
-    required this.icon,
+    required this.child,
     required this.count,
   }) : super(key: key);
 
@@ -15,10 +15,7 @@ class CustomCart extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(icon),
-        ),
+        child,
         count < 1
             ? Container()
             : Positioned(

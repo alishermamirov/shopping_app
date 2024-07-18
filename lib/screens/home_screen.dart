@@ -54,10 +54,14 @@ class _HomeScreenState extends State<HomeScreen> {
           Consumer<Cart>(
             builder: (context, cart, child) {
               return CustomCart(
-                icon: Icons.shopping_cart,
                 count: cart.itemCount(),
+                child: child!,
               );
             },
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.shopping_cart),
+            ),
           )
         ],
       ),
