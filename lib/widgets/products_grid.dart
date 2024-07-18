@@ -7,11 +7,12 @@ import 'package:shopping_app/providers/products.dart';
 import 'package:shopping_app/widgets/product_grid_item.dart';
 
 class ProductsGrid extends StatelessWidget {
-  final bool showOnlyFavorites;
   const ProductsGrid({
     Key? key,
     required this.showOnlyFavorites,
   }) : super(key: key);
+
+  final bool showOnlyFavorites;
 
   @override
   Widget build(BuildContext context) {

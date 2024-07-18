@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/providers/cart.dart';
+import 'package:shopping_app/widgets/custom_cart.dart';
 
-
-import 'package:shopping_app/widgets/products_grid.dart';
+import '../widgets/products_grid.dart';
 
 enum FiltersOption {
   All,
@@ -20,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-   
+    print("build");
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -47,6 +49,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   value: FiltersOption.Favorites,
                 ),
               ];
+            },
+          ),
+          Consumer<Cart>(
+            builder: (context, cart, child) {
+              return CustomCart(
+                icon: Icons.shopping_cart,
+                count: cart.itemCount(),
+              );
             },
           )
         ],
