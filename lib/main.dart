@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_app/providers/cart.dart';
 import 'package:shopping_app/providers/products.dart';
 import 'package:shopping_app/screens/home_screen.dart';
 import 'package:shopping_app/screens/product_details_screen.dart';
@@ -21,12 +22,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<Products>(
           create: (context) => Products(),
         ),
+        ChangeNotifierProvider<Cart>(
+          create: (context) => Cart(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme,
         routes: {
-          ProductDetailsScreen.routeName: (context) => const ProductDetailsScreen(),
+          ProductDetailsScreen.routeName: (context) =>
+              const ProductDetailsScreen(),
         },
         home: HomeScreen(),
       ),
