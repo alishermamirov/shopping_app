@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_app/providers/orders.dart';
+import 'package:shopping_app/screens/orders_screen.dart';
 import '../providers/cart.dart';
 import '../widgets/cart_list_item.dart';
 
@@ -44,7 +46,12 @@ class CartScreen extends StatelessWidget {
                       backgroundColor: Colors.green,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Provider.of<Orders>(context, listen: false).addToOrders(
+                            cart.totalPrice(), cart.items.values.toList());
+                        cart.clearCart();
+                        Navigator.of(context).pushNamed(OrdersScreen.routeName);
+                      },
                       child: const Text(
                         "Buyurtma qilish",
                         style: TextStyle(
