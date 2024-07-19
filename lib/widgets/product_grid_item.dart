@@ -45,6 +45,20 @@ class ProductGridItem extends StatelessWidget {
                 product.price,
                 product.imageUrl,
               );
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  duration: Duration(seconds: 2),
+                  content: Text("Savatga qo'shildi"),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  action: SnackBarAction(
+                    label: "Bekor qilish",
+                    onPressed: () {
+                      cart.removeSingleItem(product.id, isCartButton: true);
+                    },
+                  ),
+                ),
+              );
             },
             icon: const Icon(
               Icons.shopping_cart,
