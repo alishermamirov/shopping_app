@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/providers/orders.dart';
+import 'package:shopping_app/screens/manage_product_screen.dart';
 import 'package:shopping_app/screens/orders_screen.dart';
 import 'screens/cart_screen.dart';
 import 'providers/cart.dart';
@@ -36,11 +37,11 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: theme,
         routes: {
-          ProductDetailsScreen.routeName: (context) =>
-              const ProductDetailsScreen(),
+          HomeScreen.routeName: (context) => HomeScreen(),
           CartScreen.routeName: (context) => CartScreen(),
           OrdersScreen.routeName: (context) => OrdersScreen(),
-          HomeScreen.routeName: (context) => HomeScreen(),
+          ManageProductScreen.routeName: (context) => ManageProductScreen(),
+          ProductDetailsScreen.routeName: (context) => ProductDetailsScreen(),
         },
         initialRoute: HomeScreen.routeName,
         home: HomeScreen(),
