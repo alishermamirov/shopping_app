@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/models/product.dart';
 import 'package:shopping_app/providers/products.dart';
+import 'package:shopping_app/screens/edit_product_screen.dart';
 import 'package:shopping_app/widgets/main_drawer.dart';
 import 'package:shopping_app/widgets/user_product_item.dart';
 
@@ -20,7 +21,9 @@ class ManageProductScreen extends StatelessWidget {
         title: const Text("Mahsulatlarni boshqarish"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(EditProductScreen.routeName);
+            },
             icon: const Icon(Icons.add),
           ),
         ],

@@ -43,4 +43,16 @@ class Products with ChangeNotifier {
       (element) => element.id == id,
     );
   }
+
+  void addProduct(Product product) {
+    _list.add(product);
+    notifyListeners();
+  }
+
+  void deleteProduct(String id) {
+    _list.removeWhere(
+      (element) => element.id == id,
+    );
+    notifyListeners();
+  }
 }

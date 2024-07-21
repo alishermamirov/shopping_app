@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/models/product.dart';
@@ -10,6 +9,8 @@ class ProductGridItem extends StatelessWidget {
   const ProductGridItem({
     Key? key,
   }) : super(key: key);
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -72,20 +73,9 @@ class ProductGridItem extends StatelessWidget {
           //   product.imageUrl,
           //   fit: BoxFit.cover,
           // ),
-          child: CachedNetworkImage(
-            imageUrl: product.imageUrl,
-            imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            placeholder: (context, url) => Container(
-              color: Colors.grey.withOpacity(0.2),
-            ),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+          child: Image.network(
+            product.imageUrl,
+            fit: BoxFit.cover,
           ),
         ),
       ),
