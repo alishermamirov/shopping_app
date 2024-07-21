@@ -14,13 +14,26 @@ class EditProductScreen extends StatefulWidget {
 class _EditProductScreenState extends State<EditProductScreen> {
   final _formKey = GlobalKey<FormState>();
   final _imagFormKey = GlobalKey<FormState>();
+  var _product =
+      Product(id: "", title: "", description: "", imageUrl: "", price: 0.0);
+
   var _isImage = true;
-  var _product = Product(
-      id: UniqueKey().toString(),
-      title: "",
-      description: "",
-      imageUrl: "",
-      price: 0.0);
+  var _init = true;
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (_init) {
+      final productId = ModalRoute.of(context)!.settings.arguments;
+      if (productId != null) {
+        final _editingProduct =
+            Provider.of<Products>(context).findById(productId as String);
+        _product = _editingProduct;
+      }
+    }
+    _init = false;
+  }
 
   void submit() {
     setState(() {
@@ -29,7 +42,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
     if (_formKey.currentState!.validate() && _isImage) {
       _formKey.currentState!.save();
       print(_product.title);
-      Provider.of<Products>(context, listen: false).addProduct(_product);
+      if (_product.id.isEmpty) {
+        Provider.of<Products>(context, listen: false).addProduct(_product);
+      } else {
+        Provider.of<Products>(context, listen: false).updateProduct(_product);
+      }
       Navigator.of(context).pop();
     }
   }
@@ -55,7 +72,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           child: TextFormField(
             validator: (value) {
               if (value == null || value.isEmpty || !value.contains("http")) {
-                return "Iltimos mahsulot nomini kiriting";
+                return "Iltimos mahsulot url-ini kiriting";
               }
               return null;
             },
@@ -66,6 +83,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 description: _product.description,
                 imageUrl: newValue!,
                 price: _product.price,
+                isFavorite: _product.isFavorite,
               );
             },
             decoration: const InputDecoration(
@@ -114,6 +132,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             child: Column(
               children: [
                 TextFormField(
+                  initialValue: _product.title,
                   validator: (value) {
                     if (value == null || value.isEmpty || value.length < 3) {
                       return "Iltimos mahsulot nomini kiriting";
@@ -127,6 +146,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       description: _product.description,
                       imageUrl: _product.imageUrl,
                       price: _product.price,
+                      isFavorite: _product.isFavorite,
                     );
                   },
                   decoration: const InputDecoration(
@@ -139,10 +159,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   height: 16,
                 ),
                 TextFormField(
+                  initialValue:
+                      _product.price == 0.0 ? "" : _product.price.toString(),
                   validator: (value) {
                     if (value == null ||
                         value.isEmpty ||
-                        int.parse(value) < 1) {
+                        double.parse(value) < 1) {
                       return "Iltimos mahsulot narxini 0dan katta kiriting";
                     }
                     return null;
@@ -154,6 +176,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       description: _product.description,
                       imageUrl: _product.imageUrl,
                       price: double.parse(newValue!),
+                      isFavorite: _product.isFavorite,
                     );
                   },
                   decoration: const InputDecoration(
@@ -167,6 +190,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   height: 16,
                 ),
                 TextFormField(
+                  initialValue: _product.description,
                   validator: (value) {
                     if (value == null || value.isEmpty || value.length < 5) {
                       return "Iltimos mahsulot tarifini kiriting";
@@ -180,6 +204,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       description: newValue!,
                       imageUrl: _product.imageUrl,
                       price: _product.price,
+                      isFavorite: _product.isFavorite,
                     );
                   },
                   decoration: const InputDecoration(
