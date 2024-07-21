@@ -36,7 +36,7 @@ class UserProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context);
-    final productData = Provider.of<Products>(context, listen: false);
+
     return Card(
       child: ListTile(
         leading: CircleAvatar(
@@ -47,8 +47,9 @@ class UserProductItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(EditProductScreen.routeName,arguments: product.id),
+              onPressed: () => Navigator.of(context).pushNamed(
+                  EditProductScreen.routeName,
+                  arguments: product.id),
               icon: const Icon(
                 Icons.edit,
                 color: Colors.green,
@@ -57,7 +58,8 @@ class UserProductItem extends StatelessWidget {
             IconButton(
               onPressed: () => showDeleteProduct(context,
                   deletingFunction: () =>
-                      productData.deleteProduct(product.id)),
+                      Provider.of<Products>(context, listen: false)
+                          .deleteProduct(product.id)),
               icon: const Icon(
                 Icons.delete,
                 color: Colors.red,
